@@ -8,16 +8,7 @@ class User:
     email: str
     username: str
     password: str
-
-
-@dataclass
-class Trainer(User):
     bank_account: int
-
-
-@dataclass
-class Trainee(User):
-    pass
 
 
 @dataclass
@@ -35,6 +26,7 @@ class UserProfile:
 @dataclass
 class TrainerProfile(UserProfile):
     trainer_type: TrainerType
+    description: str
 
 
 @dataclass
