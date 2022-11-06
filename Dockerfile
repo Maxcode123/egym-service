@@ -8,3 +8,5 @@ RUN apt-get update && \
 RUN pip3 install -r requirements.txt
 
 COPY . .
+
+CMD ["python", "egym_service.py"]
