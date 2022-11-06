@@ -1,4 +1,8 @@
 PSQLHOME=/var/lib/postgres
+IMAGE=egym-app
+
+build-img:
+	docker build --tag $(IMAGE) .
 
 psql-scripts:
 	rm $(PSQLHOME)/scripts/egym/*
