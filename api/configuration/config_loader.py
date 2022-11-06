@@ -1,7 +1,9 @@
+import os
 import json
 from dataclasses import dataclass
 from typing import Dict, Any
 
+from api import ROOT
 
 @dataclass
 class Config:
@@ -16,7 +18,7 @@ class ConfigLoader:
     
     @classmethod
     def load_config(cls) -> Config:
-        with open() as f:
+        with open(os.path.join(ROOT, "configuration", "conf.json")) as f:
             json_conf = json.load(f)
         conf = cls._create_config(json_conf)
         return conf

@@ -40,7 +40,7 @@ class UsersProvider:
         FROM _Users AS _U, TrainerData AS TD
         """
         values = (
-            trainer.trainer_type,
+            trainer.trainer_type.value,
             trainer.description,
             trainer.name,
             trainer.surname,

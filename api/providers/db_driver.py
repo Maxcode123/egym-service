@@ -17,6 +17,10 @@ class DbDriver:
         self.connection: Optional[Connection] = None
     
     def execute(self, query: str, values: Tuple = (), fetch: bool = True):
+        """
+        Raises DbConnectionError if connection to db fails.
+        Raises SQLError if execution of query fails.
+        """
         conn = self._get_connection()
         crsr = conn.cursor()
         try:
@@ -27,6 +31,7 @@ class DbDriver:
         except Exception as e:
             raise SQLError(e)
         finally:
+            conn.commit()
             self._close_connection()
 
     def _get_connection(self) -> Connection:
