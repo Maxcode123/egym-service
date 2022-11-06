@@ -1,0 +1,11 @@
+DROP TABLE Users CASCADE;
+DROP TABLE Gear CASCADE;
+DROP TABLE UserGear;
+DROP TABLE TrainerTypes CASCADE;
+DROP TABLE Trainers CASCADE;
+DROP TABLE TrainerExercises CASCADE;
+DROP TABLE Courses CASCADE;
+DROP TABLE Trainees CASCADE;
+DROP TABLE TrainersTrainees;
+DROP TABLE TraineeCourses;
+DROP TABLE TraineeExercises;
