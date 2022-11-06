@@ -1,6 +1,7 @@
 from typing import Tuple, Optional
 
-import psycopg2
+import psycopg
+from psycopg.connection import Connection
 
 from api.business_logic.exc import DbConnectionError, SQLError
 
@@ -13,7 +14,7 @@ class DbDriver:
     
     def __init__(self, connection_string: str) -> None:
         self.connection_string = connection_string
-        self.connection: Optional[psycopg2.connection] = None
+        self.connection: Optional[Connection] = None
     
     def execute(self, query: str, values: Tuple = (), fetch: bool = True):
         conn = self._get_connection()
@@ -28,11 +29,11 @@ class DbDriver:
         finally:
             self._close_connection()
 
-    def _get_connection(self) -> psycopg2.connection:
+    def _get_connection(self) -> Connection:
         if self.connection_string is None:
             raise DbConnectionError("Missing connection string.")
         try:
-            conn = psycopg2.connect(self.connection_string)
+            conn = psycopg.connect(self.connection_string)
             return conn
         except Exception as e:
             raise DbConnectionError(e)
