@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Sex(str, Enum):
     MALE = "M"
     FEMALE = "F"

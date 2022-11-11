@@ -4,5 +4,3 @@ class DbConnectionError(Exception):
 
 class SQLError(Exception):
     pass
-
-

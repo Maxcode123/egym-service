@@ -102,4 +102,3 @@ CREATE TABLE TraineeExercises (
     CONSTRAINT TraineeExercises_FK1 FOREIGN KEY (TraineeId) REFERENCES Trainees,
     CONSTRAINT TraineeExercises_FK2 FOREIGN KEY (TrainerExerciseId) REFERENCES TrainerExercises
 );
-
