@@ -14,6 +14,7 @@ def write_trainer(user: TrainerProfile):
     try:
         provider.write_trainer(user)
     except (DbConnectionError, SQLError) as e:
+        print(e)
         raise HTTPException(status_code=503, detail=str(e))
 
 @app.post("/write_trainee")
@@ -21,5 +22,6 @@ def write_trainee(user: TraineeProfile):
     provider = ProvidersFactory.get_users_provider()
     try:
         provider.write_trainee(user)
-    except (DbConnectionError, SQLError):
-        raise HTTPException(status_code=503, detail="Writing of trainee failed.")
+    except (DbConnectionError, SQLError) as e:
+        print(e)
+        raise HTTPException(status_code=503, detail=str(e))

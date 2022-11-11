@@ -9,3 +9,9 @@ class Sex(str, Enum):
 class TrainerType(Enum):
     FREELANCER = 1
     GYM = 2
+
+
+class Env(Enum):
+    PROD = 1
+    DEV = 2
+    LOCAL = 3

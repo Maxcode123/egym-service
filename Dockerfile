@@ -7,6 +7,7 @@ RUN apt-get update && \
     apt-get -y install libpq-dev gcc
 RUN pip3 install -r requirements.txt
 
+ENV ENVM=1
 COPY . .
 
 CMD ["python", "egym_service.py"]
