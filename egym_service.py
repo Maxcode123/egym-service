@@ -1,6 +1,6 @@
 import uvicorn
 
-from api.endpoints.egym import app
+from api.app import app
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=24550)
+    uvicorn.run(app, port=8000)
