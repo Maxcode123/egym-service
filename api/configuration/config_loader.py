@@ -35,8 +35,7 @@ class ConfigLoader:
     
     @classmethod
     def _get_secret_conf(cls) -> Config:
-        session = boto3.Session()
-        client = session.client(
+        client = boto3.client(
             service_name="secretsmanager",
             region_name=cls.region_name,
             )

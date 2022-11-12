@@ -35,7 +35,7 @@ class DbDriver:
             self._close_connection()
 
     def _get_connection(self) -> Connection:
-        if self.connection_string is None:
+        if self.connection_string is None or self.connection_string == "":
             raise DbConnectionError("Missing connection string.")
         try:
             conn = psycopg.connect(self.connection_string)
