@@ -2,12 +2,13 @@ FROM python:3.11.0-slim-buster
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
 RUN apt-get update && \
     apt-get -y install libpq-dev gcc
+
+COPY requirements.txt /app/requirements.txt
 RUN pip3 install -r requirements.txt
 
 ENV ENVM=1
-COPY . .
+COPY api /app/api
 
-CMD ["python", "egym_service.py"]
+CMD ["uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "80"]
