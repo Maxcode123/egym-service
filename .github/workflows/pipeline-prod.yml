@@ -35,4 +35,4 @@ jobs:
         envs: IMAGE,API_PORT
         script: |
           docker pull $IMAGE:dev
-          docker run --name $IMAGE_server -p $API_PORT:80 $IMAGE
+          docker run -dp 8000:80 $IMAGE
