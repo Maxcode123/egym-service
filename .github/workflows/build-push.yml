@@ -1,0 +1,24 @@
+name: Build and Push img
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build-push:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build and push image
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PWD:  ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        make build-img
+        docker login -u $DOCKER_USER -p $DOCKER_PWD
+        make push-img
