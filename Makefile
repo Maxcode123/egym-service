@@ -10,7 +10,11 @@ push-img:
 	docker tag ${IMAGE}:latest ${REMOTE_IMAGE}:dev
 	docker push ${REMOTE_IMAGE}:dev
 
+pull-img:
+	docker pull ${REMOTE_IMAGE}:dev
+
 run:
+	docker stop ${IMAGE}-container
 	docker container rm ${IMAGE}-container
 	docker run --name ${IMAGE}-container -p ${HOST_PORT}:80 ${IMAGE}
 
