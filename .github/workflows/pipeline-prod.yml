@@ -28,7 +28,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.ACTION_PRIVATE_KEY }}
-        fingerprint: ${{ secrets.FINGERPRINT }}
         debug: true
         timeout: "60s"
         script: |
