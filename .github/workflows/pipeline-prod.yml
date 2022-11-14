@@ -28,6 +28,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.ACTION_PRIVATE_KEY }}
+        timeout: 60
         script: |
           make pull-img
           make run
