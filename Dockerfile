@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get -y install libpq-dev gcc
 
 COPY requirements.txt /app/requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 ARG ACCESS_KEY_ID
 ARG SECRET_ACCESS_KEY
