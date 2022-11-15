@@ -8,6 +8,16 @@ RUN apt-get update && \
 COPY requirements.txt /app/requirements.txt
 RUN pip3 install -r requirements.txt
 
+ARG ACCESS_KEY_ID
+ARG SECRET_ACCESS_KEY
+RUN mkdir ~/.aws && \
+    echo "[default]" > ~/.aws/config && \
+    echo "output = json" >> ~/.aws/config && \
+    echo "region = us-east-1" >> ~/.aws/config && \
+    echo "[default]" > ~/.aws/credentials && \
+    echo "aws_access_key_id = ${ACCESS_KEY_ID}" >> ~/.aws/credentials && \
+    echo "aws_secret_access_key = ${SECRET_ACCESS_KEY}" >> ~/.aws/credentials
+
 ENV ENVM=1
 COPY api /app/api
 
