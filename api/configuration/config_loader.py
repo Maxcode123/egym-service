@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 import boto3
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, NoCredentialsError
 
 from api.business_logic.enums import Env
 from api import ROOT
@@ -46,6 +46,8 @@ class ConfigLoader:
             return Config(connection_string=conn_str)       
         except ClientError as e:
             raise e
+        except NoCredentialsError as e:
+            raise Exception("Unable to fetch AWS credentials to load secret connection string.")
 
     @staticmethod
     def _get_local_conf() -> Config:
