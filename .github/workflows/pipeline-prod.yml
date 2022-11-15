@@ -38,4 +38,5 @@ jobs:
         envs: IMAGE,API_PORT
         script: |
           docker pull $IMAGE:dev
-          docker run -dp 8000:80 $IMAGE:dev
+          docker stop app || true && docker rm app || true
+	        docker run --name app -p ${API_PORT}:80 ${IMAGE}:dev
