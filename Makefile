@@ -2,11 +2,9 @@ PSQLHOME=/var/lib/postgres
 IMAGE=egym-app
 REMOTE_IMAGE=nikiforomaximos/egym
 HOST_PORT=8000
-ACCESS_KEY_ID ?=
-SECRET_ACCESS_KEY ?=
 
 build-img:
-	docker build --tag ${IMAGE} --build-arg ACCESS_KEY_ID --build-arg SECRET_ACCESS_KEY .
+	docker build --tag ${IMAGE} .
 
 push-img:
 	docker tag ${IMAGE}:latest ${REMOTE_IMAGE}:dev
