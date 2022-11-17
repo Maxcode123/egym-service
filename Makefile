@@ -6,7 +6,7 @@ ACCESS_KEY_ID ?=
 SECRET_ACCESS_KEY ?=
 
 build-img:
-	docker build --tag ${IMAGE} --build-arg ACCESS_KEY_ID=${ACCESS_KEY_ID} --build-arg SECRET_ACCESS_KEY=${SECRET_ACCESS_KEY} .
+	docker build --tag ${IMAGE} --build-arg ACCESS_KEY_ID --build-arg SECRET_ACCESS_KEY .
 
 push-img:
 	docker tag ${IMAGE}:latest ${REMOTE_IMAGE}:dev
