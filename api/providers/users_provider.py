@@ -20,19 +20,12 @@ class UsersProvider:
         pass
 
     def write_trainer(self, trainer: TrainerProfile) -> None:
-        query = """
+        query = f"""
         WITH
             TrainerData (TypeId, Description) AS (
                 VALUES (%s, %s)
             ),
-            _Users AS (
-                INSERT INTO Users (
-                    Name, Surname, Sex, Age, Email, Username, Password, Country,
-                    Area, PhoneNumber
-                    ) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                RETURNING UserId
-            )
+            {self._write_user_query()}
         INSERT INTO Trainers (
             UserId, TrainerTypeId, ProfileDescription
         )
@@ -57,19 +50,12 @@ class UsersProvider:
 
 
     def write_trainee(self, trainee: TraineeProfile) -> None:
-        query = """
+        query = f"""
         WITH
             TraineeData (Weight, Height) AS (
                 VALUES (%s, %s)
             ),
-            _Users AS (
-                INSERT INTO Users (
-                    Name, Surname, Sex, Age, Email, Username, Password, Country,
-                    Area, PhoneNumber
-                    ) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                RETURNING UserId
-            )
+            {self._write_user_query()}
         INSERT INTO Trainees (
             UserId, Weight, Height
         )
@@ -91,3 +77,15 @@ class UsersProvider:
             trainee.phone_number,
         )
         self.db_driver.execute(query, values=values, fetch=False)
+
+    @staticmethod
+    def _write_user_query() -> str:
+        return """
+        _Users AS (
+            INSERT INTO Users (
+                Name, Surname, Sex, Age, Email, Username, Password, Country,
+                Area, PhoneNumber
+                ) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING UserId
+        """
