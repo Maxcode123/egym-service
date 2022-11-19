@@ -3,3 +3,4 @@ api/providers/__pycache__/*
 api/business_logic/__pycache__/*
 api/configuration/__pycache__/*
 api/endpoints/__pycache__/*
+.aws/
