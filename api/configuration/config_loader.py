@@ -27,7 +27,7 @@ class ConfigLoader:
     @classmethod
     def load_config(cls) -> Config:
         if cls.conf is None:
-            if os.getenv("ENVM") == Env.PROD:
+            if Env(int(os.getenv("ENVM"))) == Env.PROD:
                 cls.conf = cls._get_secret_conf()
             else:
                 cls.conf = cls._get_local_conf()
