@@ -1,21 +1,27 @@
-PSQLHOME=/var/lib/postgres
-IMAGE=egym-app
-REMOTE_IMAGE=nikiforomaximos/egym
-HOST_PORT=8000
+PSQLHOME=
+IMGTAR=${IMAGE}.tar
+HOST_PORT=
+HOST=
+DEST=
 
 build-img:
 	docker build --tag ${IMAGE} .
+	docker save -o ${IMGTAR} ${IMAGE}
+	chmod a+rwx ${IMGTAR}
 
-push-img:
-	docker tag ${IMAGE}:latest ${REMOTE_IMAGE}:dev
-	docker push ${REMOTE_IMAGE}:dev
+send-img:
+	rsync ${IMGTAR} ${USER}@${HOST}:${DEST}
 
-pull-img:
-	docker pull ${REMOTE_IMAGE}:dev
+connect:
+	ssh ${USER}@${HOST}
+
+deploy:
+	ssh ${USER}@${HOST} 'sudo docker load < ${DEST}${IMGTAR} && \
+	docker stop app || true && docker rm app || true && \
+	docker run --name app -dp ${HOST_PORT}:80 ${IMAGE}'
 
 run:
-	docker stop app || true && docker rm app || true
-	docker run --name app -p ${HOST_PORT}:80 ${IMAGE}
+	docker run -p ${HOST_PORT}:80 ${IMAGE}
 
 psql-scripts:
 	rm ${PSQLHOME}/scripts/egym/*
