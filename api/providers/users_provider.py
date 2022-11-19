@@ -88,4 +88,5 @@ class UsersProvider:
                 ) 
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING UserId
+            )
         """
